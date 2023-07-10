@@ -13,12 +13,17 @@ class Categoria(models.Model):
 class Conta(models.Model):
     banco_choices = (
         ('NU', 'Nubank'),
-        ('CE', 'Caixa econômica'),
+        ('CE', 'Caixa Econômica'),
+        ('IU', 'Itaú Unibanco'),
+        ('IT', 'Iti'),
+        ('BB', 'Banco do Brasil'),
+        ('BR', 'Bradesco'),
+        ('C6', 'C6'),
     )
 
     tipo_choices = (
-        ('pf', 'Pessoa física'),
-        ('pj', 'Pessoa jurídica'),
+        ('PF', 'Pessoa Física'),
+        ('PJ', 'Pessoa Jurídica'),
     )
 
     apelido = models.CharField(max_length=50)

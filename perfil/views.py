@@ -6,6 +6,7 @@ from django.contrib.messages import constants
 
 def home(request):
     return render(request, 'home.html')
+
 def gerenciar(request):
     contas = Conta.objects.all()
     categorias = Categoria.objects.all()
@@ -19,7 +20,6 @@ def gerenciar(request):
         'total_conta': total_conta,
         'categorias':categorias
     })
-
 
 def cadastrar_banco(request):
     apelido = request.POST.get('apelido')
@@ -48,15 +48,15 @@ def deletar_banco(request, id):
     conta = Conta.objects.get(id=id)
     conta.delete()
 
-    messages.add_message(request, constants.SUCCESS, 'Conta removida com sucesso!') # noqa
+    messages.add_message(request, constants.SUCCESS, 'Conta removida com sucesso!')
     return redirect('/perfil/gerenciar/')
 
 def cadastrar_categoria(request):
     nome = request.POST.get('categoria')
     essencial = bool(request.POST.get('essencial'))
 
-    if len(nome.strip()) == 0: # noqa
-        messages.add_message(request, constants.ERROR, 'Preencha todos os campos!') # noqa
+    if len(nome.strip()) == 0:
+        messages.add_message(request, constants.ERROR, 'Preencha todos os campos!')
         return redirect('/perfil/gerenciar/')
 
     categoria = Categoria(
@@ -66,5 +66,30 @@ def cadastrar_categoria(request):
 
     categoria.save()
 
-    messages.add_message(request, constants.SUCCESS, 'Categoria cadastrada com sucesso!') # noqa
+    messages.add_message(request, constants.SUCCESS, 'Categoria cadastrada com sucesso!')
     return redirect('/perfil/gerenciar/')
+
+
+def update_categoria(request, id):
+    categoria = Categoria.objects.get(id=id)
+
+    categoria.essencial = not categoria.essencial
+
+    categoria.save()
+
+    messages.add_message(request, constants.SUCCESS, 'Categoria alterada com sucesso!')
+    return redirect('/perfil/gerenciar/')
+
+
+# def dashboard(request):
+#     dados = {}
+#     categorias = Categoria.objects.all()
+#
+#     for categoria in categorias:
+#         total = 0
+#         valores = Valores.objects.filter(categoria=categoria)
+#         for v in valores:
+#             total = total + v.valor
+#         dados[categoria.categoria] = total
+#
+#     return render(request, 'dashboard.html', {'labels': list(dados.keys()), 'values': list(dados.values())})
