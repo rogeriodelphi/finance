@@ -5,7 +5,7 @@
     <h3>Sistema de Gestão de Finanças Pessoais</h3>
 </div>
 
-![](https://github.com/rogeriodelphi/imobi/blob/master/blob/master/images/demo.png)
+![](https://github.com/rogeriodelphi/imobi/blob/master/blob/master/images/finance-preview.png)
     
 # FINANCE
 ```bash
