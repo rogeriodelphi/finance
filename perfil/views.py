@@ -70,26 +70,9 @@ def cadastrar_categoria(request):
     return redirect('/perfil/gerenciar/')
 
 
-def update_categoria(request, id):
+def atualizar_categoria(request, id):
     categoria = Categoria.objects.get(id=id)
-
     categoria.essencial = not categoria.essencial
-
     categoria.save()
-
     messages.add_message(request, constants.SUCCESS, 'Categoria alterada com sucesso!')
     return redirect('/perfil/gerenciar/')
-
-
-# def dashboard(request):
-#     dados = {}
-#     categorias = Categoria.objects.all()
-#
-#     for categoria in categorias:
-#         total = 0
-#         valores = Valores.objects.filter(categoria=categoria)
-#         for v in valores:
-#             total = total + v.valor
-#         dados[categoria.categoria] = total
-#
-#     return render(request, 'dashboard.html', {'labels': list(dados.keys()), 'values': list(dados.values())})
